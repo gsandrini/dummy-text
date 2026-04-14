@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* THEME TOKENS (LIGHT / DARK) */
+
+/* Colors */
+:root {
+    --color-bg: #f7f7f5; /* snow */
+    --color-surface: #ffffff;
+    --color-border: rgba(0, 0, 0, 0.10);
+    --color-border-focus: rgba(0, 0, 0, 0.30);
+    --color-text: #0f0f0f; /* ink */
+    --color-muted: #6b6b68; /* dim */
+    --color-inverse-bg: #0f0f0f;
+    --color-inverse-text: #f7f7f5;
+    --color-hover-bg: rgba(0, 0, 0, 0.05);
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-bg: #0f0f0f;
+        --color-surface: rgba(255, 255, 255, 0.05);
+        --color-border: rgba(255, 255, 255, 0.10);
+        --color-border-focus: rgba(255, 255, 255, 0.30);
+        --color-text: #f7f7f5;
+        --color-muted: #6b6b68;
+        --color-inverse-bg: #f7f7f5;
+        --color-inverse-text: #0f0f0f;
+        --color-hover-bg: rgba(255, 255, 255, 0.10);
+    }
+}
+
+/* BASE RESET / GLOBAL RULES */
+
+/* Utility */
+[x-cloak] {
+    display: none !important;
+}
+
+/* Form elements */
+textarea {
+    field-sizing: content;
+    min-height: 96px;
+}
+
+/* Body */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+}
+
+/* COMPONENTS */
+
+/* Card */
+.card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    padding: 1rem;
+}
+
+/* Label */
+.label {
+    display: block;
+    font-size: 0.625rem; /* 10px */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+}
+
+/* Muted text */
+.text-muted {
+    color: var(--color-muted);
+}
+
+/* Divider */
+.divider {
+    border-top: 1px solid var(--color-border);
+}
+
+/* BUTTONS */
+
+/* Primary button */
+.btn-primary {
+    background-color: var(--color-inverse-bg);
+    color: var(--color-inverse-text);
+    border: none;
+    transition: opacity 0.15s, transform 0.15s;
+}
+
+.btn-primary:hover {
+    opacity: 0.8;
+}
+
+.btn-primary:active {
+    transform: scale(0.97);
+}
+
+/* Secondary button */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-muted);
+    border: 1px solid var(--color-border);
+    transition: background-color 0.15s, transform 0.15s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-hover-bg);
+}
+
+.btn-secondary:active {
+    transform: scale(0.97);
+}
+
+/* Mode buttons */
+.mode-btn {
+    background-color: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.mode-btn:hover {
+    background-color: var(--color-hover-bg);
+}
+
+.mode-btn.active {
+    background-color: var(--color-inverse-bg);
+    color: var(--color-inverse-text);
+    border-color: transparent;
+}
+
+/* Preset buttons */
+.preset-btn {
+    background-color: transparent;
+    color: var(--color-muted);
+    border: 1px solid var(--color-border);
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.preset-btn:hover {
+    background-color: var(--color-hover-bg);
+    color: var(--color-text);
+}
+
+.preset-btn.active {
+    background-color: var(--color-inverse-bg);
+    color: var(--color-inverse-text);
+    border-color: transparent;
+}
+
+/* FORM FIELDS */
+
+/* Input / Textarea */
+.field {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.field:focus {
+    border-color: var(--color-border-focus);
+}
+
+.field::placeholder {
+    color: var(--color-muted);
+    opacity: 0.5;
+}
+
+/* Output area */
+.output-area {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    resize: none;
+    cursor: default;
+}
+
+/* FOOTER */
+
+/* Footer link */
+.footer-link {
+    color: var(--color-muted);
+    opacity: 0.7;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity 0.15s;
+}
+
+.footer-link:hover {
+    opacity: 1;
+}
+
+/* BROWSER FIXES / OVERRIDES */
+
+/* Remove number input spinners */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
