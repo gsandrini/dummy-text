@@ -12,11 +12,17 @@ const TRANSLATIONS = {
     characters: 'Caratteri',
     bytes: 'Bytes',
     title: 'Dummy Text',
+    activateLightTheme: 'Attiva tema chiaro',
+    activateDarkTheme: 'Attiva tema scuro',
+    switchToItalian: 'Passa a italiano',
+    switchToEnglish: 'Passa a inglese',
+    decreaseQuantity: 'Diminuisci quantità',
+    increaseQuantity: 'Aumenta quantità',
     copyText: 'Copia testo',
     textCopied: 'Testo copiato',
     mode: 'Modalità',
     quantity: 'Quantità',
-    madeWith: 'Sviluppata con il supporto di',
+    madeWith: 'Developed with AI assistance',
     output: 'Output',
     generateText: 'Genera testo'
   },
@@ -26,11 +32,17 @@ const TRANSLATIONS = {
     characters: 'Characters',
     bytes: 'Bytes',
     title: 'Dummy Text',
+    activateLightTheme: 'Activate light theme',
+    activateDarkTheme: 'Activate dark theme',
+    switchToItalian: 'Switch to Italian',
+    switchToEnglish: 'Switch to English',
+    decreaseQuantity: 'Decrease quantity',
+    increaseQuantity: 'Increase quantity',
     copyText: 'Copy text',
     textCopied: 'Text copied',
     mode: 'Mode',
     quantity: 'Quantity',
-    madeWith: 'Developed with the support of',
+    madeWith: 'Developed with AI assistance',
     output: 'Output',
     generateText: 'Generate text'
   },
@@ -51,16 +63,21 @@ velit esse cillum dolore ut enim ad minim veniam quis nostrud exercitation
 ullamco laboris nisi ut aliquip curabitur non nulla sit amet nisl tempus
 convallis quis ac lectus`.trim().split(/\s+/).filter(Boolean);
 
+const PREF_KEYS = { language: 'dummy-text-language', theme: 'dummy-text-theme' };
+const THEME_COLORS = { light: '#f7f7f4', dark: '#181a1f' };
+
 /* APP STATE */
 function dummyTextApp() {
   return {
 
-    /* LANGUAGE */
+    /* LANGUAGE & THEME */
 
     /**
-     * Current language (auto-detected from browser)
+     * Initial values are resolved once by the inline script in <head>
+     * (saved preference, otherwise system language / color scheme)
      */
-    lang: navigator.language.startsWith('it') ? 'it' : 'en',
+    lang: document.documentElement.lang === 'it' ? 'it' : 'en',
+    theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light',
 
     /**
      * Active translations object
@@ -69,11 +86,30 @@ function dummyTextApp() {
       return TRANSLATIONS[this.lang];
     },
 
+    setLanguage(nextLanguage) {
+      if (!Object.prototype.hasOwnProperty.call(TRANSLATIONS, nextLanguage)) return;
+      this.lang = nextLanguage;
+      document.documentElement.lang = nextLanguage;
+      try { localStorage.setItem(PREF_KEYS.language, nextLanguage); } catch (_) {}
+    },
+
     /**
-     * Toggle between IT and EN languages
+     * Toggle between IT and EN without resetting generator state
      */
     toggleLang() {
-      this.lang = this.lang === 'it' ? 'en' : 'it';
+      this.setLanguage(this.lang === 'it' ? 'en' : 'it');
+    },
+
+    setTheme(nextTheme) {
+      if (nextTheme !== 'light' && nextTheme !== 'dark') return;
+      this.theme = nextTheme;
+      document.documentElement.dataset.theme = nextTheme;
+      document.querySelector('meta[name="theme-color"]').content = THEME_COLORS[nextTheme];
+      try { localStorage.setItem(PREF_KEYS.theme, nextTheme); } catch (_) {}
+    },
+
+    toggleTheme() {
+      this.setTheme(this.theme === 'dark' ? 'light' : 'dark');
     },
 
     /* MODE */

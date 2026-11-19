@@ -11,8 +11,9 @@ A lightweight, browser-based Lorem Ipsum generator.
 - Generate text by **words**, **paragraphs**, **characters** or **bytes**
 - Quick presets and adjustable quantity
 - One-click **copy to clipboard**
+- Switchable **light and dark themes** with a saved preference (defaults to the system color scheme)
+- Italian and English UI with a saved preference (defaults to the browser language)
 - 100% client-side - runs entirely in the browser
-- Dark mode interface
 - Zero runtime dependencies beyond Alpine.js
 
 ---
@@ -39,13 +40,13 @@ The app is available as a **Progressive Web App (PWA)** and can be installed dir
 
 - [Alpine.js](https://alpinejs.dev) - Reactive UI (bundled locally)
 - [Tailwind CSS](https://tailwindcss.com) - Styling (compiled locally)
-- [JetBrains Mono](https://www.jetbrains.com/lp/mono/) - Typography
+- [Google Fonts](https://fonts.google.com) - Inter and JetBrains Mono typography (loaded from CDN)
 
 ---
 
 ## Built with
 
-This project was built with the support of [Claude](https://claude.ai) by Anthropic.
+This project was built with the support of AI.
 
 ---
 
