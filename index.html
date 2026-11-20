@@ -135,6 +135,13 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/dummy-text/sw.js');
     }
+
+    window.addEventListener('load', () => {
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+      if (isStandalone) {
+        window.resizeTo(750, 650);
+      }
+    });
   </script>
 </body>
 
